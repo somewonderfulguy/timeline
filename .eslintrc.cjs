@@ -15,6 +15,7 @@ module.exports = {
       { allowConstantExport: true }
     ],
     '@typescript-eslint/no-unused-vars': 'warn',
-    'no-console': ['warn', { allow: ['warn', 'error'] }]
+    'no-console': ['warn', { allow: ['warn', 'error'] }],
+    'react-refresh/only-export-components': 'off'
   }
 };

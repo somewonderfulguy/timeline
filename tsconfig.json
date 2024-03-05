@@ -32,10 +32,11 @@
     "baseUrl": "src",
     "paths": {
       /* keep in alphabetical order */
+      "~api/*": ["api/*"],
       "~components/*": ["components/*"],
+      "~contexts/*": ["contexts/*"],
       "~utils/*": ["utils/*"]
     }
   },
-  "include": ["src"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "include": ["src", "./src/api/offline.ts"]
 }

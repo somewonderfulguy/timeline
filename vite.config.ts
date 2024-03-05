@@ -6,7 +6,9 @@ export default defineConfig({
   resolve: {
     alias: {
       // keep in alphabetical order
+      '~api': '/src/api',
       '~components': '/src/components',
+      '~contexts': '/src/contexts',
       '~utils': '/src/utils'
     }
   }
