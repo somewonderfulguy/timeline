@@ -1,7 +1,5 @@
 import { setupWorker } from 'msw';
 
-import { editorDataHandlers } from './editorData/editorDataMSW';
-
-export const handlers = [...editorDataHandlers];
+import { handlers } from './mswHandlers';
 
 export const worker = setupWorker(...handlers);

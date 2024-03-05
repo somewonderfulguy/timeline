@@ -16,26 +16,33 @@ export const queryClient = new QueryClient({
   }
 });
 
-const App = () => {
+const AppProviders = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <VideoEditorProvider>
-        <main>
-          <PlayerBlank />
-          <div className={styles.timelineRoot}>
-            <div className={styles.timelineRow}>
-              <TimelineOptions />
-              <Timeline />
-            </div>
-            <div className={styles.timelineRow}>
-              <TimelineOptions />
-              <Timeline />
-            </div>
-          </div>
-        </main>
+        <App />
       </VideoEditorProvider>
     </QueryClientProvider>
   );
 };
 
-export default App;
+const App = () => {
+  return (
+    <main>
+      <PlayerBlank />
+      <div className={styles.timelineRoot}>
+        <div className={styles.timelineRow}>
+          <TimelineOptions />
+          <Timeline />
+        </div>
+        <div className={styles.timelineRow}>
+          <TimelineOptions />
+          <Timeline />
+        </div>
+      </div>
+    </main>
+  );
+};
+
+export default AppProviders;
+export { App };

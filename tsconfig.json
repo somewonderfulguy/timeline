@@ -35,8 +35,9 @@
       "~api/*": ["api/*"],
       "~components/*": ["components/*"],
       "~contexts/*": ["contexts/*"],
+      "~tests/*": ["tests/*"],
       "~utils/*": ["utils/*"]
     }
   },
-  "include": ["src", "./src/api/offline.ts"]
+  "include": ["src"]
 }
