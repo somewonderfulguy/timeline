@@ -3,6 +3,8 @@
 ```bash
 pnpm i
 pnpm dev
+# OR
+pnpm dev-offline
 ```
 
 # React + TypeScript + Vite
