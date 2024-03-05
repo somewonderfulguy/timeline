@@ -1,6 +1,6 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { SetupWorker } from 'msw';
+import { SetupWorker } from 'msw/browser';
 
 import App from './App';
 
