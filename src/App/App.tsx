@@ -1,7 +1,7 @@
-import './App.css'
+import './reset.css';
 
 function App() {
-  return <>init app</>
+  return <>init app</>;
 }
 
-export default App
+export default App;
