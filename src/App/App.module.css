@@ -1,0 +1,18 @@
+:root {
+  --light-gray: #f5f5f5;
+  --gray: #e0e0e0;
+}
+
+.timelineRoot {
+  background-color: var(--light-gray);
+
+  .timelineRow {
+    height: 100px;
+    display: flex;
+
+    border-bottom: 1px solid var(--gray);
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+}
