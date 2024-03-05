@@ -26,7 +26,15 @@
     "noImplicitAny": true,
 
     /* Types */
-    "types": ["vitest/globals"]
+    "types": ["vitest/globals"],
+
+    /* Paths */
+    "baseUrl": "src",
+    "paths": {
+      /* keep in alphabetical order */
+      "~components/*": ["components/*"],
+      "~utils/*": ["utils/*"]
+    }
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]

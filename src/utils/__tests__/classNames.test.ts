@@ -1,4 +1,4 @@
-import classNames from './classNames';
+import classNames from '../classNames';
 
 test('classNames util works', () => {
   expect(classNames('foo', 'bar')).toBe('foo bar');

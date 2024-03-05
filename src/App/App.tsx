@@ -1,6 +1,6 @@
-import PlayerBlank from '../components/PlayerBlank';
-import Timeline from '../components/Timeline';
-import TimelineOptions from '../components/TimelineOptions';
+import PlayerBlank from '~components/PlayerBlank';
+import Timeline from '~components/Timeline';
+import TimelineOptions from '~components/TimelineOptions';
 
 import styles from './App.module.css';
 import './reset.css';
