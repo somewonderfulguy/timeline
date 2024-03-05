@@ -1,5 +1,5 @@
 const Timeline = () => {
-  return <div>11</div>;
+  return <div>timeline</div>;
 };
 
 export default Timeline;
