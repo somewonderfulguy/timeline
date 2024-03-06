@@ -1,5 +1,5 @@
 .main {
-  --options-width: 100px;
+  --options-width: 150px;
 }
 
 .playerWrapper {
@@ -27,4 +27,28 @@
 
 .timeline {
   width: calc(100% - var(--options-width));
+}
+
+.timelineBar {
+  height: 30px;
+  background-color: var(--mid-gray);
+  border-bottom: 1px solid var(--gray);
+
+  display: flex;
+
+  .sliderContainer {
+    width: var(--options-width);
+    border-right: 1px solid var(--gray);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .slider {
+    width: 120px;
+  }
+
+  .rulerContainer {
+    width: calc(100% - var(--options-width));
+  }
 }
