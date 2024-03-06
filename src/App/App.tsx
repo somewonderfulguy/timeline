@@ -1,5 +1,7 @@
 import { CSSProperties, useState } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 
 import PlayerBlank from '~components/PlayerBlank';
 import Timeline from '~components/Timeline';
@@ -80,16 +82,18 @@ const App = () => {
           >
             <TimelineRuler style={{ ...unscaleStyle }} />
           </div>
-          {rowsData?.timeline.map(({ id, fragments, type }) => (
-            <Timeline
-              key={id}
-              className={styles.timeline}
-              fragments={fragments}
-              type={type}
-              style={{ scale: scaleStyle }}
-              unscaleStyle={unscaleStyle}
-            />
-          ))}
+          <DndProvider backend={HTML5Backend}>
+            {rowsData?.timeline.map(({ id, fragments, type }) => (
+              <Timeline
+                key={id}
+                className={styles.timeline}
+                fragments={fragments}
+                type={type}
+                style={{ scale: scaleStyle }}
+                unscaleStyle={unscaleStyle}
+              />
+            ))}
+          </DndProvider>
         </div>
       </div>
     </main>

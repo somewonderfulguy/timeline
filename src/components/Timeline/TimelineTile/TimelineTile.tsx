@@ -1,4 +1,5 @@
 import { CSSProperties, HTMLAttributes } from 'react';
+import { useDrag } from 'react-dnd';
 
 import { MediaType, TimelineFragment } from '~api/editorData';
 import classNames from '~utils/classNames';
@@ -16,12 +17,30 @@ const TimelineTile = ({
   name,
   type,
   className,
+  style,
   thumbnail,
   unscaleStyle,
+  id,
   ...rest
 }: Props) => {
+  const [{ isDragging }, drag] = useDrag(() => ({
+    type,
+    item: { id },
+    collect: (monitor) => ({
+      isDragging: !!monitor.isDragging()
+    })
+  }));
+
   return (
-    <div {...rest} className={classNames(styles.tileContainer, className)}>
+    <div
+      ref={drag}
+      {...rest}
+      className={classNames(styles.tileContainer, className)}
+      style={{
+        ...style,
+        ...(isDragging && { opacity: 0.5 })
+      }}
+    >
       <div className={classNames(styles[type], className)} style={unscaleStyle}>
         <div
           className={styles.thumbnail}
