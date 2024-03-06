@@ -3,6 +3,10 @@
   --gray: #e0e0e0;
 }
 
+.playerWrapper {
+  border-bottom: 1px solid var(--gray);
+}
+
 .timelineRoot {
   background-color: var(--light-gray);
 

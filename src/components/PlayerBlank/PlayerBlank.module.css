@@ -1,0 +1,17 @@
+.container {
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.player {
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  max-width: 800px;
+  overflow: hidden;
+
+  & img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+}

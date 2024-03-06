@@ -37,7 +37,10 @@
       "~contexts/*": ["contexts/*"],
       "~tests/*": ["tests/*"],
       "~utils/*": ["utils/*"]
-    }
+    },
+
+    /* Plugins */
+    "plugins": [{ "name": "typescript-plugin-css-modules" }]
   },
   "include": ["src"]
 }

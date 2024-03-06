@@ -29,7 +29,7 @@ const AppProviders = () => {
 const App = () => {
   return (
     <main>
-      <PlayerBlank />
+      <PlayerBlank className={styles.playerWrapper} />
       <div className={styles.timelineRoot}>
         <div className={styles.timelineRow}>
           <TimelineOptions />
