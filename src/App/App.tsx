@@ -4,16 +4,16 @@ import { DndProvider } from 'react-dnd';
 import { TouchBackend } from 'react-dnd-touch-backend';
 
 import PlayerBlank from '~components/PlayerBlank';
-import Timeline from '~components/timelineComponents/Timeline';
-import TimelineOptions from '~components/timelineComponents/TimelineOptions';
+import Timeline from '~components/timeline/Timeline';
+import TimelineOptions from '~components/timeline/TimelineOptions';
 import {
   VideoEditorProvider,
   useVideoEditor
 } from '~contexts/videoEditorContext';
 import Slider from '~components/controls/Slider';
+import TimelineRuler from '~components/timeline/TimelineRuler';
 
 import styles from './App.module.css';
-import TimelineRuler from '~components/timelineComponents/TimelineRuler';
 
 export const queryClient = new QueryClient({
   defaultOptions: {
