@@ -6,6 +6,7 @@ export const alias = {
   '~api': '/src/api',
   '~components': '/src/components',
   '~contexts': '/src/contexts',
+  '~hooks': '/src/hooks',
   '~tests': '/src/tests',
   '~utils': '/src/utils'
 };

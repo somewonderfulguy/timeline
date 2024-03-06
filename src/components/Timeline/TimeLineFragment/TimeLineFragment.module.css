@@ -1,0 +1,10 @@
+.fragment {
+}
+
+.fragmentVideo {
+  composes: fragment;
+}
+
+.fragmentAudio {
+  composes: fragment;
+}

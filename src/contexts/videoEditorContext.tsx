@@ -1,20 +1,38 @@
 import { UseQueryResult } from '@tanstack/react-query';
-import { createContext, ReactNode, useContext } from 'react';
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState
+} from 'react';
 
 import { VideoEditor, useEditorData } from '~api/index';
+import usePrevious from '~hooks/usePrevious';
 
 type Context = {
   rowsData?: VideoEditor;
-  queryData: Omit<UseQueryResult<VideoEditor, unknown>, 'data'>;
+  queryData: UseQueryResult<VideoEditor, unknown>;
 };
 const VideoEditorContext = createContext<Context | undefined>(undefined);
 VideoEditorContext.displayName = 'VideoEditorContext';
 
 const VideoEditorProvider = ({ children }: { children: ReactNode }) => {
-  const { data, ...queryData } = useEditorData();
+  const queryData = useEditorData();
+  const isSuccess = queryData.isSuccess;
+
+  // state need to be duplicated (from react query) in order to manipulate with the data
+  const [rowsData, setRowsData] = useState<VideoEditor | undefined>(undefined);
+
+  const prevIsSuccess = usePrevious(isSuccess);
+  useEffect(() => {
+    if (isSuccess && !prevIsSuccess) {
+      setRowsData(queryData.data);
+    }
+  }, [prevIsSuccess, isSuccess, queryData.data]);
 
   return (
-    <VideoEditorContext.Provider value={{ rowsData: data, queryData }}>
+    <VideoEditorContext.Provider value={{ rowsData, queryData }}>
       {children}
     </VideoEditorContext.Provider>
   );

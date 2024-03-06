@@ -1,5 +1,20 @@
+/* font */
 @import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap');
-
 body {
   font-family: 'Roboto', sans-serif;
+}
+
+/* colors */
+:root {
+  --light-gray: rgb(245, 245, 245);
+  --mid-light-gray: rgb(237 237 237);
+  --mid-gray: rgb(230, 230, 230);
+  --gray: rgb(220, 220, 220);
+
+  --primary: #ffa500;
+  --secondary: #4376a1;
+  --tertiary: #38694c;
+}
+body {
+  background-color: var(--light-gray);
 }

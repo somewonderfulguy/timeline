@@ -2,8 +2,11 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import PlayerBlank from '~components/PlayerBlank';
 import Timeline from '~components/Timeline';
-import TimelineOptions from '~components/TimelineOptions';
-import { VideoEditorProvider } from '~contexts/videoEditorContext';
+import TimelineOptions from '~components/Timeline/TimelineOptions';
+import {
+  VideoEditorProvider,
+  useVideoEditor
+} from '~contexts/videoEditorContext';
 
 import styles from './App.module.css';
 
@@ -27,18 +30,17 @@ const AppProviders = () => {
 };
 
 const App = () => {
+  const { rowsData } = useVideoEditor();
   return (
-    <main>
+    <main className={styles.main}>
       <PlayerBlank className={styles.playerWrapper} />
       <div className={styles.timelineRoot}>
-        <div className={styles.timelineRow}>
-          <TimelineOptions />
-          <Timeline />
-        </div>
-        <div className={styles.timelineRow}>
-          <TimelineOptions />
-          <Timeline />
-        </div>
+        {rowsData?.timeline.map(({ id, fragments }) => (
+          <div key={id} className={styles.timelineRow}>
+            <TimelineOptions className={styles.timelineOptions} />
+            <Timeline className={styles.timeline} fragments={fragments} />
+          </div>
+        ))}
       </div>
     </main>
   );

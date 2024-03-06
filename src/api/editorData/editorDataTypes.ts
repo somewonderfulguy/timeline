@@ -2,12 +2,12 @@ export type TimeLineRow = {
   options: unknown;
   id: string;
   fragments: TimeLineFragment[];
+  type: 'video' | 'audio';
 };
 
 export type TimeLineFragment = {
   options: unknown;
   id: string;
-  type: 'video' | 'image';
   src: string;
   name: string;
   start: number;

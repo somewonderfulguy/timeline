@@ -35,6 +35,7 @@
       "~api/*": ["api/*"],
       "~components/*": ["components/*"],
       "~contexts/*": ["contexts/*"],
+      "~hooks/*": ["hooks/*"],
       "~tests/*": ["tests/*"],
       "~utils/*": ["utils/*"]
     },
