@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import PlayerBlank from '~components/PlayerBlank';
@@ -30,15 +31,26 @@ const AppProviders = () => {
   );
 };
 
+const defaultScale = 6;
 const App = () => {
+  const [scale, setScale] = useState(defaultScale);
   const { rowsData } = useVideoEditor();
+
   return (
     <main className={styles.main}>
       <PlayerBlank className={styles.playerWrapper} />
       <div className={styles.timelineRoot}>
         <div className={styles.timelineBar}>
           <div className={styles.sliderContainer}>
-            <Slider className={styles.slider} />
+            <Slider
+              className={styles.slider}
+              defaultValue={[defaultScale]}
+              value={[scale]}
+              onValueChange={([value]) => setScale(value)}
+              max={10}
+              min={1}
+              step={1}
+            />
           </div>
           <div className={styles.rulerContainer}>ruler...</div>
         </div>
@@ -49,6 +61,7 @@ const App = () => {
               className={styles.timeline}
               fragments={fragments}
               type={type}
+              scale={scale}
             />
           </div>
         ))}

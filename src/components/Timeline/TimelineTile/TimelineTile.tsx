@@ -9,9 +9,19 @@ import soundWaveImg from './assets/sound-wave.png';
 type Props = TimelineFragment &
   HTMLAttributes<HTMLDivElement> & {
     type: MediaType;
+    scale: number;
   };
 
-const TimelineTile = ({ name, type, className, thumbnail, ...rest }: Props) => {
+const TimelineTile = ({
+  name,
+  type,
+  className,
+  thumbnail,
+  scale,
+  ...rest
+}: Props) => {
+  const scaleCss = `${1 / scale} 1`;
+  const width = `calc(100% * ${scale})`;
   return (
     <div {...rest} className={classNames(styles[type], className)}>
       <div
@@ -19,10 +29,14 @@ const TimelineTile = ({ name, type, className, thumbnail, ...rest }: Props) => {
         style={{
           ...(type === 'audio' && { backgroundImage: `url(${soundWaveImg})` }),
           ...(type === 'video' &&
-            thumbnail && { backgroundImage: `url(${thumbnail})` })
+            thumbnail && { backgroundImage: `url(${thumbnail})` }),
+          scale: scaleCss,
+          width
         }}
       />
-      <div className={styles.name}>{name}</div>
+      <div className={styles.name} style={{ scale: scaleCss, width }}>
+        {name}
+      </div>
     </div>
   );
 };

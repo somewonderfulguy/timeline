@@ -2,6 +2,7 @@
   background-color: var(--mid-light-gray);
 
   position: relative;
+  transform-origin: left;
 }
 
 .tile {
