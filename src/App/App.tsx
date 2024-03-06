@@ -11,6 +11,7 @@ import {
 import Slider from '~components/controls/Slider';
 
 import styles from './App.module.css';
+import TimelineRuler from '~components/Timeline/TimelineRuler';
 
 export const queryClient = new QueryClient({
   defaultOptions: {
@@ -31,7 +32,7 @@ const AppProviders = () => {
   );
 };
 
-const defaultScale = 6;
+const defaultScale = 3;
 const App = () => {
   const [scale, setScale] = useState(defaultScale);
   const { rowsData } = useVideoEditor();
@@ -70,9 +71,14 @@ const App = () => {
         <div className={styles.timelineColumn}>
           <div
             className={styles.rulerScaleContainer}
-            style={{ scale: scaleStyle }}
+            style={
+              {
+                scale: scaleStyle,
+                '--ruler-unit': `${scale}px`
+              } as CSSProperties
+            }
           >
-            <div style={unscaleStyle}>ruler...</div>
+            <TimelineRuler style={{ ...unscaleStyle }} />
           </div>
           {rowsData?.timeline.map(({ id, fragments, type }) => (
             <Timeline

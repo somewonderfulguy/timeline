@@ -46,6 +46,10 @@
   .rulerScaleContainer {
     background-color: var(--mid-gray);
     transform-origin: left;
+
+    & > * {
+      height: 100%;
+    }
   }
 }
 
