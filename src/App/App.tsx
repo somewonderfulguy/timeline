@@ -35,13 +35,13 @@ const App = () => {
   return (
     <main className={styles.main}>
       <PlayerBlank className={styles.playerWrapper} />
-      <div className={styles.timelineBar}>
-        <div className={styles.sliderContainer}>
-          <Slider className={styles.slider} />
-        </div>
-        <div className={styles.rulerContainer}>ruler...</div>
-      </div>
       <div className={styles.timelineRoot}>
+        <div className={styles.timelineBar}>
+          <div className={styles.sliderContainer}>
+            <Slider className={styles.slider} />
+          </div>
+          <div className={styles.rulerContainer}>ruler...</div>
+        </div>
         {rowsData?.timeline.map(({ id, fragments, type }) => (
           <div key={id} className={styles.timelineRow}>
             <TimelineOptions className={styles.timelineOptions} type={type} />

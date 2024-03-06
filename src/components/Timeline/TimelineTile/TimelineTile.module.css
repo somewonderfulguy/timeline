@@ -6,6 +6,10 @@
 
   color: #fff;
   overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
 }
 
 .video {
@@ -16,4 +20,16 @@
 .audio {
   composes: tile;
   background-color: var(--tertiary);
+}
+
+.name {
+  padding: 0 5px 2px 5px;
+  font-size: 10px;
+}
+
+.thumbnail {
+  flex-grow: 1;
+
+  opacity: 0.8;
+  background-size: auto 100%;
 }

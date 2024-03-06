@@ -11,25 +11,31 @@ export const editorDataMock: VideoEditor = {
         {
           id: 'fragment-0',
           src: 'https://www.w3schools.com/html/mov_bbb.mp4',
-          name: 'mov_bbb.mp4',
+          name: 'europe_city.mp4',
           start: 0,
-          duration: 10,
+          duration: 90,
+          thumbnail:
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgwX62cBcrEZu-M2E0ms7sEnlqxoXAkCGzHQ&usqp=CAU',
           options: {}
         },
         {
           id: 'fragment-1',
           src: 'https://www.w3schools.com/html/mov_bbb.mp4',
-          name: 'mov_bbb2.mp4',
-          start: 11,
-          duration: 15,
+          name: 'ny_city.mp4',
+          start: 110,
+          duration: 200,
+          thumbnail:
+            'https://styles.redditmedia.com/t5_2sftr/styles/communityIcon_cfj2la8jdhdb1.png',
           options: {}
         },
         {
           id: 'fragment-2',
           src: 'https://www.w3schools.com/html/mov_bbb.mp4',
-          name: 'mov_bbb3.mp4',
-          start: 18,
-          duration: 40,
+          name: 'kyiv.mp4',
+          start: 410,
+          duration: 90,
+          thumbnail:
+            'https://media-cdn.tripadvisor.com/media/photo-s/08/1e/5e/53/caption.jpg',
           options: {}
         }
       ]
@@ -42,10 +48,12 @@ export const editorDataMock: VideoEditor = {
         {
           id: 'fragment-3',
           src: 'https://www.w3schools.com/html/mov_bbb.mp4',
-          name: 'one_minute.mp4',
+          name: 'kyiv.mp4',
           start: 30,
-          duration: 5 * 60,
-          options: {}
+          duration: 5 * 60 + 20,
+          options: {},
+          thumbnail:
+            'https://media-cdn.tripadvisor.com/media/photo-s/08/1e/5e/53/caption.jpg'
         }
       ]
     },
@@ -73,16 +81,16 @@ export const editorDataMock: VideoEditor = {
           id: 'fragment-4',
           src: 'https://www.w3schools.com/html/mov_bbb.mp4',
           name: 'birds.mp3',
-          start: 0,
-          duration: 30,
+          start: 10,
+          duration: 70,
           options: {}
         },
         {
           id: 'fragment-5',
           src: 'https://www.w3schools.com/html/mov_bbb.mp4',
-          name: 'birds.mp3',
-          start: 0,
-          duration: 30,
+          name: 'forrest.mp3',
+          start: 120,
+          duration: 90,
           options: {}
         }
       ]

@@ -14,6 +14,7 @@ export type TimelineFragment = {
   name: string;
   start: number;
   duration: number;
+  thumbnail?: string;
 };
 
 export type VideoEditor = {
