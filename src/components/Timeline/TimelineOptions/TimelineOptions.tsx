@@ -5,9 +5,13 @@ import classNames from '~utils/classNames';
 
 import styles from './TimelineOptions.module.css';
 
-const TimelineOptions = ({ className }: HTMLAttributes<HTMLDivElement>) => {
+type Props = HTMLAttributes<HTMLDivElement> & {
+  type: 'video' | 'audio';
+};
+
+const TimelineOptions = ({ className, type }: Props) => {
   return (
-    <div className={classNames(styles.options, className)}>
+    <div className={classNames(className, styles.options, styles[type])}>
       <button
         type="button"
         className={styles.control}

@@ -5,6 +5,8 @@
   align-items: center;
   justify-content: center;
   gap: 10px;
+
+  border-left: 5px solid var(--gray);
 }
 
 .control {
@@ -18,4 +20,12 @@
     opacity: 0.5;
     cursor: default;
   }
+}
+
+.video {
+  border-color: var(--secondary);
+}
+
+.audio {
+  border-color: var(--tertiary);
 }

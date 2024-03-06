@@ -1,3 +1,5 @@
 .timeline {
   background-color: var(--mid-light-gray);
+
+  position: relative;
 }

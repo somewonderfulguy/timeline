@@ -35,9 +35,9 @@ const App = () => {
     <main className={styles.main}>
       <PlayerBlank className={styles.playerWrapper} />
       <div className={styles.timelineRoot}>
-        {rowsData?.timeline.map(({ id, fragments }) => (
+        {rowsData?.timeline.map(({ id, fragments, type }) => (
           <div key={id} className={styles.timelineRow}>
-            <TimelineOptions className={styles.timelineOptions} />
+            <TimelineOptions className={styles.timelineOptions} type={type} />
             <Timeline className={styles.timeline} fragments={fragments} />
           </div>
         ))}
