@@ -1,19 +1,27 @@
 import { HTMLAttributes } from 'react';
 
-import { TimeLineFragment } from '~api/editorData';
-
-import styles from './Timeline.module.css';
+import { MediaType, TimelineFragment } from '~api/editorData';
 import classNames from '~utils/classNames';
 
+import TimelineTile from './TimelineTile';
+
+import styles from './Timeline.module.css';
+
 type Props = HTMLAttributes<HTMLDivElement> & {
-  fragments: TimeLineFragment[];
+  fragments: TimelineFragment[];
+  type: MediaType;
 };
 
-const Timeline = ({ fragments, className, ...rest }: Props) => {
+const Timeline = ({ fragments, className, type, ...rest }: Props) => {
   return (
     <div {...rest} className={classNames(styles.timeline, className)}>
-      {fragments.map(({ id, name }) => (
-        <div key={id}>{name}</div>
+      {fragments.map((props) => (
+        <TimelineTile
+          type={type}
+          className={styles.tile}
+          {...props}
+          style={{ left: props.start, width: props.duration }}
+        />
       ))}
     </div>
   );

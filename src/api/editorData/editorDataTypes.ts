@@ -1,11 +1,13 @@
-export type TimeLineRow = {
+export type MediaType = 'video' | 'audio';
+
+export type TimelineRow = {
   options: unknown;
   id: string;
-  fragments: TimeLineFragment[];
-  type: 'video' | 'audio';
+  fragments: TimelineFragment[];
+  type: MediaType;
 };
 
-export type TimeLineFragment = {
+export type TimelineFragment = {
   options: unknown;
   id: string;
   src: string;
@@ -16,5 +18,5 @@ export type TimeLineFragment = {
 
 export type VideoEditor = {
   options: unknown;
-  timeline: TimeLineRow[];
+  timeline: TimelineRow[];
 };

@@ -38,7 +38,11 @@ const App = () => {
         {rowsData?.timeline.map(({ id, fragments, type }) => (
           <div key={id} className={styles.timelineRow}>
             <TimelineOptions className={styles.timelineOptions} type={type} />
-            <Timeline className={styles.timeline} fragments={fragments} />
+            <Timeline
+              className={styles.timeline}
+              fragments={fragments}
+              type={type}
+            />
           </div>
         ))}
       </div>

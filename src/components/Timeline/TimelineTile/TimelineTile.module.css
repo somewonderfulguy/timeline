@@ -1,0 +1,19 @@
+.tile {
+  background-color: var(--gray);
+
+  height: 100%;
+  border-radius: 2px;
+
+  color: #fff;
+  overflow: hidden;
+}
+
+.video {
+  composes: tile;
+  background-color: var(--secondary);
+}
+
+.audio {
+  composes: tile;
+  background-color: var(--tertiary);
+}
