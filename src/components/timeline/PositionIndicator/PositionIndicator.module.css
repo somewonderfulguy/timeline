@@ -1,0 +1,23 @@
+.indicator {
+  width: 13px;
+  height: 50px;
+  background-color: var(--primary);
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+  clip-path: polygon(
+    0% 0%,
+    0% 7px,
+    5px 11px,
+    5px 100%,
+    8px 100%,
+    8px 11px,
+    100% 7px,
+    100% 0%
+  );
+}
+
+.head {
+  width: 13px;
+  height: 13px;
+  cursor: e-resize;
+}

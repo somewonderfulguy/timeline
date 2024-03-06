@@ -2,6 +2,7 @@ import { CSSProperties, useState } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { DndProvider } from 'react-dnd';
 import { TouchBackend } from 'react-dnd-touch-backend';
+import Draggable from 'react-draggable';
 
 import PlayerBlank from '~components/PlayerBlank';
 import Timeline from '~components/timeline/Timeline';
@@ -12,6 +13,7 @@ import {
 } from '~contexts/videoEditorContext';
 import Slider from '~components/controls/Slider';
 import TimelineRuler from '~components/timeline/TimelineRuler';
+import PositionIndicator from '~components/timeline/PositionIndicator';
 
 import styles from './App.module.css';
 
@@ -46,6 +48,8 @@ const App = () => {
     transformOrigin: 'left'
   };
 
+  const [indicatorPosition, setIndicatorPosition] = useState(23 * scale);
+
   return (
     <main className={styles.main}>
       <PlayerBlank className={styles.playerWrapper} />
@@ -71,6 +75,21 @@ const App = () => {
           ))}
         </div>
         <div className={styles.timelineColumn}>
+          <Draggable
+            axis="x"
+            bounds="parent"
+            onDrag={(e, { x }) => {
+              setIndicatorPosition(x / scale);
+            }}
+            position={{ x: indicatorPosition * scale, y: 0 }}
+          >
+            <PositionIndicator
+              className={styles.indicator}
+              // style={{ translate: `${indicatorPosition}px` }}
+            >
+              <PositionIndicator.Head />
+            </PositionIndicator>
+          </Draggable>
           <div
             className={styles.rulerScaleContainer}
             style={

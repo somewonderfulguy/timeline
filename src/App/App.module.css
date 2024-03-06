@@ -33,6 +33,7 @@
 .timelineColumn {
   width: calc(100% - var(--options-width));
   background-color: var(--light-gray);
+  position: relative;
 
   overflow-x: auto;
   overflow-y: hidden;
@@ -51,6 +52,12 @@
       height: 100%;
     }
   }
+}
+
+.indicator {
+  position: absolute;
+  z-index: 1;
+  height: 100%;
 }
 
 .timelineOptions,
