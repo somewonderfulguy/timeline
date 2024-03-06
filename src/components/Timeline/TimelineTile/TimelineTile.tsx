@@ -1,4 +1,4 @@
-import { HTMLAttributes } from 'react';
+import { CSSProperties, HTMLAttributes } from 'react';
 
 import { MediaType, TimelineFragment } from '~api/editorData';
 import classNames from '~utils/classNames';
@@ -9,7 +9,7 @@ import soundWaveImg from './assets/sound-wave.png';
 type Props = TimelineFragment &
   HTMLAttributes<HTMLDivElement> & {
     type: MediaType;
-    scale: number;
+    unscaleStyle: CSSProperties;
   };
 
 const TimelineTile = ({
@@ -17,25 +17,23 @@ const TimelineTile = ({
   type,
   className,
   thumbnail,
-  scale,
+  unscaleStyle,
   ...rest
 }: Props) => {
-  const scaleCss = `${1 / scale} 1`;
-  const width = `calc(100% * ${scale})`;
   return (
-    <div {...rest} className={classNames(styles[type], className)}>
-      <div
-        className={styles.thumbnail}
-        style={{
-          ...(type === 'audio' && { backgroundImage: `url(${soundWaveImg})` }),
-          ...(type === 'video' &&
-            thumbnail && { backgroundImage: `url(${thumbnail})` }),
-          scale: scaleCss,
-          width
-        }}
-      />
-      <div className={styles.name} style={{ scale: scaleCss, width }}>
-        {name}
+    <div {...rest} className={classNames(styles.tileContainer, className)}>
+      <div className={classNames(styles[type], className)} style={unscaleStyle}>
+        <div
+          className={styles.thumbnail}
+          style={{
+            ...(type === 'audio' && {
+              backgroundImage: `url(${soundWaveImg})`
+            }),
+            ...(type === 'video' &&
+              thumbnail && { backgroundImage: `url(${thumbnail})` })
+          }}
+        />
+        <div className={styles.name}>{name}</div>
       </div>
     </div>
   );

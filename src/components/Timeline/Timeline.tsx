@@ -1,4 +1,4 @@
-import { HTMLAttributes } from 'react';
+import { CSSProperties, HTMLAttributes } from 'react';
 
 import { MediaType, TimelineFragment } from '~api/editorData';
 import classNames from '~utils/classNames';
@@ -10,16 +10,18 @@ import styles from './Timeline.module.css';
 type Props = HTMLAttributes<HTMLDivElement> & {
   fragments: TimelineFragment[];
   type: MediaType;
-  scale: number;
+  unscaleStyle: CSSProperties;
 };
 
-const Timeline = ({ fragments, className, type, scale, ...rest }: Props) => {
+const Timeline = ({
+  fragments,
+  className,
+  type,
+  unscaleStyle,
+  ...rest
+}: Props) => {
   return (
-    <div
-      {...rest}
-      className={classNames(styles.timeline, className)}
-      style={{ ...rest.style, scale: `${scale} 1` }}
-    >
+    <div {...rest} className={classNames(styles.timeline, className)}>
       {fragments.map((props) => (
         <TimelineTile
           key={props.id}
@@ -27,7 +29,7 @@ const Timeline = ({ fragments, className, type, scale, ...rest }: Props) => {
           className={styles.tile}
           {...props}
           style={{ left: props.start, width: props.duration }}
-          scale={scale}
+          unscaleStyle={unscaleStyle}
         />
       ))}
     </div>

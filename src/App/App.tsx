@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { CSSProperties, useState } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import PlayerBlank from '~components/PlayerBlank';
@@ -36,11 +36,18 @@ const App = () => {
   const [scale, setScale] = useState(defaultScale);
   const { rowsData } = useVideoEditor();
 
+  const scaleStyle = `${scale} 1`;
+  const unscaleStyle: CSSProperties = {
+    scale: `${1 / scale} 1`,
+    width: `calc(100% * ${scale})`,
+    transformOrigin: 'left'
+  };
+
   return (
     <main className={styles.main}>
       <PlayerBlank className={styles.playerWrapper} />
       <div className={styles.timelineRoot}>
-        <div className={styles.timelineBar}>
+        <div className={styles.optionsColumn}>
           <div className={styles.sliderContainer}>
             <Slider
               className={styles.slider}
@@ -52,19 +59,32 @@ const App = () => {
               step={1}
             />
           </div>
-          <div className={styles.rulerContainer}>ruler...</div>
+          {rowsData?.timeline.map(({ id, type }) => (
+            <TimelineOptions
+              key={id}
+              className={styles.timelineOptions}
+              type={type}
+            />
+          ))}
         </div>
-        {rowsData?.timeline.map(({ id, fragments, type }) => (
-          <div key={id} className={styles.timelineRow}>
-            <TimelineOptions className={styles.timelineOptions} type={type} />
+        <div className={styles.timelineColumn}>
+          <div
+            className={styles.rulerScaleContainer}
+            style={{ scale: scaleStyle }}
+          >
+            <div style={unscaleStyle}>ruler...</div>
+          </div>
+          {rowsData?.timeline.map(({ id, fragments, type }) => (
             <Timeline
+              key={id}
               className={styles.timeline}
               fragments={fragments}
               type={type}
-              scale={scale}
+              style={{ scale: scaleStyle }}
+              unscaleStyle={unscaleStyle}
             />
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </main>
   );
