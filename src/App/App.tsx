@@ -1,11 +1,11 @@
 import { CSSProperties, useState } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { DndProvider } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
+import { TouchBackend } from 'react-dnd-touch-backend';
 
 import PlayerBlank from '~components/PlayerBlank';
-import Timeline from '~components/Timeline';
-import TimelineOptions from '~components/Timeline/TimelineOptions';
+import Timeline from '~components/timelineComponents/Timeline';
+import TimelineOptions from '~components/timelineComponents/TimelineOptions';
 import {
   VideoEditorProvider,
   useVideoEditor
@@ -13,7 +13,7 @@ import {
 import Slider from '~components/controls/Slider';
 
 import styles from './App.module.css';
-import TimelineRuler from '~components/Timeline/TimelineRuler';
+import TimelineRuler from '~components/timelineComponents/TimelineRuler';
 
 export const queryClient = new QueryClient({
   defaultOptions: {
@@ -82,7 +82,10 @@ const App = () => {
           >
             <TimelineRuler style={{ ...unscaleStyle }} />
           </div>
-          <DndProvider backend={HTML5Backend}>
+          <DndProvider
+            backend={TouchBackend}
+            options={{ enableMouseEvents: true }}
+          >
             {rowsData?.timeline.map(({ id, fragments, type }) => (
               <Timeline
                 key={id}
