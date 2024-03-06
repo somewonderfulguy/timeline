@@ -1,13 +1,55 @@
 .container {
   background-color: var(--light-gray);
+  position: relative;
 }
 
 .progressBar {
+  background-color: var(--gray);
+  height: 5px;
+  width: 100%;
+
+  position: relative;
+
   .progress {
+    background-color: var(--primary);
+    height: 100%;
+    width: 100%;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    scale: 0.35 1;
+    transform-origin: left;
   }
 }
 
 .controls {
-  .controlButton {
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+.controlButton {
+  border: 0;
+  background-color: transparent;
+  padding: 0;
+  width: 20px;
+  height: 20px;
+  & svg {
+    width: 100%;
+    height: 100%;
   }
+}
+.controlButtonLarger {
+  composes: controlButton;
+  width: 28px;
+  height: 28px;
+}
+.expandButton {
+  composes: controlButton;
+  position: absolute;
+  top: 50%;
+  translate: 0 -50%;
+  right: 20px;
 }
