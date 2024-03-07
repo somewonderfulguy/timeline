@@ -83,12 +83,7 @@ const App = () => {
             }}
             position={{ x: indicatorPosition * scale, y: 0 }}
           >
-            <PositionIndicator
-              className={styles.indicator}
-              // style={{ translate: `${indicatorPosition}px` }}
-            >
-              <PositionIndicator.Head />
-            </PositionIndicator>
+            <PositionIndicator className={styles.indicator} />
           </Draggable>
           <div
             className={styles.rulerScaleContainer}
