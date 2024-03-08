@@ -1,7 +1,9 @@
 import { UseQueryResult } from '@tanstack/react-query';
 import {
   createContext,
+  Dispatch,
   ReactNode,
+  SetStateAction,
   useContext,
   useEffect,
   useState
@@ -13,6 +15,7 @@ import usePrevious from '~hooks/usePrevious';
 type Context = {
   rowsData?: VideoEditor;
   queryData: UseQueryResult<VideoEditor, unknown>;
+  setRowsData: Dispatch<SetStateAction<VideoEditor | undefined>>;
 };
 const VideoEditorContext = createContext<Context | undefined>(undefined);
 VideoEditorContext.displayName = 'VideoEditorContext';
@@ -27,12 +30,12 @@ const VideoEditorProvider = ({ children }: { children: ReactNode }) => {
   const prevIsSuccess = usePrevious(isSuccess);
   useEffect(() => {
     if (isSuccess && !prevIsSuccess) {
-      setRowsData(queryData.data);
+      setRowsData({ ...queryData.data });
     }
   }, [prevIsSuccess, isSuccess, queryData.data]);
 
   return (
-    <VideoEditorContext.Provider value={{ rowsData, queryData }}>
+    <VideoEditorContext.Provider value={{ rowsData, setRowsData, queryData }}>
       {children}
     </VideoEditorContext.Provider>
   );

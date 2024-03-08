@@ -63,7 +63,7 @@ export const editorDataMock: VideoEditor = {
       type: 'audio',
       fragments: [
         {
-          id: 'fragment-3',
+          id: 'fragment-4',
           src: 'https://www.w3schools.com/html/mov_bbb.mp4',
           name: 'vivaldi.mp3',
           start: 0,
@@ -78,7 +78,7 @@ export const editorDataMock: VideoEditor = {
       type: 'audio',
       fragments: [
         {
-          id: 'fragment-4',
+          id: 'fragment-5',
           src: 'https://www.w3schools.com/html/mov_bbb.mp4',
           name: 'birds.mp3',
           start: 10,
@@ -86,7 +86,7 @@ export const editorDataMock: VideoEditor = {
           options: {}
         },
         {
-          id: 'fragment-5',
+          id: 'fragment-6',
           src: 'https://www.w3schools.com/html/mov_bbb.mp4',
           name: 'forrest.mp3',
           start: 120,

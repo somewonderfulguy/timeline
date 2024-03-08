@@ -7,4 +7,11 @@
 
 .tile {
   position: absolute;
+  user-select: none;
+}
+
+.dragPreview {
+  composes: tile;
+  opacity: 0.8;
+  z-index: 2;
 }

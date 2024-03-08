@@ -1,10 +1,11 @@
-import { CSSProperties, HTMLAttributes } from 'react';
+import { CSSProperties, HTMLAttributes, useRef, useState } from 'react';
 import { useDrop } from 'react-dnd';
 
 import { MediaType, TimelineFragment } from '~api/editorData';
 import classNames from '~utils/classNames';
+import { useVideoEditor } from '~contexts/videoEditorContext';
 
-import TimelineTile from './TimelineTile';
+import TimelineTile, { DragItem } from './TimelineTile';
 
 import styles from './Timeline.module.css';
 
@@ -12,28 +13,99 @@ type Props = HTMLAttributes<HTMLDivElement> & {
   fragments: TimelineFragment[];
   type: MediaType;
   unscaleStyle: CSSProperties;
+  scale: number;
+  timelineId: string;
 };
 
 const Timeline = ({
   fragments,
   className,
   type,
+  scale,
   unscaleStyle,
+  timelineId,
   ...rest
 }: Props) => {
-  // TODO: implement drop
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [{ canDrop, isOver }, drop] = useDrop(() => ({
-    accept: type,
-    drop: (item, monitor) => {
-      // eslint-disable-next-line no-console
-      console.log('dropped', item, monitor, monitor.getItem());
-    },
-    collect: (monitor) => ({
-      isOver: !!monitor.isOver(),
-      canDrop: !!monitor.canDrop()
-    })
-  }));
+  const dragItem = useRef<DragItem | null>(null);
+  const [dragOffset, setDragOffset] = useState(0);
+  const { setRowsData } = useVideoEditor();
+
+  const [{ isOver }, drop] = useDrop(
+    () => ({
+      accept: type,
+      drop: ({ timelineId: from, ...item }: DragItem, monitor) => {
+        const to = timelineId;
+        const isTheSameTrack = from === to;
+        const offset = monitor.getDifferenceFromInitialOffset()?.x ?? 0;
+
+        if (isTheSameTrack) {
+          setRowsData((prev) => {
+            if (!prev) return prev;
+
+            return {
+              ...prev,
+              timeline: prev.timeline.map((row) =>
+                row.id !== from
+                  ? row
+                  : {
+                      ...row,
+                      fragments: row.fragments.map((fragment) =>
+                        fragment.id !== item.id
+                          ? fragment
+                          : {
+                              ...fragment,
+                              start: fragment.start + Math.floor(offset / scale)
+                            }
+                      )
+                    }
+              )
+            };
+          });
+        } else {
+          setRowsData((prev) => {
+            if (!prev) return prev;
+
+            return {
+              ...prev,
+              timeline: prev.timeline.map((row) => {
+                if (row.id === from) {
+                  return {
+                    ...row,
+                    fragments: row.fragments.filter(
+                      (fragment) => fragment.id !== item.id
+                    )
+                  };
+                }
+                if (row.id === to) {
+                  return {
+                    ...row,
+                    fragments: [
+                      ...row.fragments,
+                      {
+                        ...item,
+                        start: item.start + Math.floor(offset / scale)
+                      }
+                    ]
+                  };
+                }
+                return row;
+              })
+            };
+          });
+        }
+      },
+      collect: (monitor) => {
+        const timelineFragment: DragItem = monitor.getItem();
+        dragItem.current = timelineFragment;
+        setDragOffset(monitor.getDifferenceFromInitialOffset()?.x ?? 0);
+        return {
+          isOver: !!monitor.isOver(),
+          canDrop: !!monitor.canDrop()
+        };
+      }
+    }),
+    [scale, timelineId, setRowsData]
+  );
 
   return (
     <div
@@ -41,16 +113,33 @@ const Timeline = ({
       {...rest}
       className={classNames(styles.timeline, className)}
     >
-      {fragments.map((props) => (
+      {isOver && dragItem.current && (
         <TimelineTile
-          key={props.id}
+          key={`${dragItem.current.id}-drag-preview`}
           type={type}
-          className={styles.tile}
-          {...props}
-          style={{ left: props.start, width: props.duration }}
+          {...dragItem.current}
+          className={styles.dragPreview}
+          style={{
+            left: dragItem.current.start,
+            width: dragItem.current.duration,
+            transform: `translateX(${dragOffset / scale}px)`
+          }}
           unscaleStyle={unscaleStyle}
         />
-      ))}
+      )}
+      {fragments.map((props) => {
+        return (
+          <TimelineTile
+            key={props.id}
+            type={type}
+            className={styles.tile}
+            timelineId={timelineId}
+            {...props}
+            style={{ left: props.start, width: props.duration }}
+            unscaleStyle={unscaleStyle}
+          />
+        );
+      })}
     </div>
   );
 };

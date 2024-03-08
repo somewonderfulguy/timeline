@@ -1,4 +1,4 @@
-import { CSSProperties, HTMLAttributes } from 'react';
+import { CSSProperties, HTMLAttributes, useMemo } from 'react';
 import { useDrag } from 'react-dnd';
 
 import { MediaType, TimelineFragment } from '~api/editorData';
@@ -11,35 +11,57 @@ type Props = TimelineFragment &
   HTMLAttributes<HTMLDivElement> & {
     type: MediaType;
     unscaleStyle: CSSProperties;
+    timelineId: string;
   };
+
+export type DragItem = TimelineFragment & {
+  timelineId: string;
+};
 
 const TimelineTile = ({
   name,
   type,
   className,
-  style,
   thumbnail,
-  unscaleStyle,
+  duration,
+  start,
+  src,
   id,
+  options,
+  timelineId,
+  unscaleStyle,
   ...rest
 }: Props) => {
-  const [{ isDragging }, drag] = useDrag(() => ({
-    type,
-    item: { id },
-    collect: (monitor) => ({
-      isDragging: !!monitor.isDragging()
-    })
-  }));
+  const dragTileProps = useMemo(
+    () => ({
+      id,
+      thumbnail,
+      options,
+      duration,
+      start,
+      name,
+      src,
+      timelineId
+    }),
+    [id, thumbnail, options, duration, start, name, src, timelineId]
+  );
+
+  const [, drag] = useDrag(
+    () => ({
+      type,
+      item: dragTileProps satisfies DragItem,
+      collect: (monitor) => ({
+        isDragging: !!monitor.isDragging()
+      })
+    }),
+    [dragTileProps]
+  );
 
   return (
     <div
       ref={drag}
       {...rest}
       className={classNames(styles.tileContainer, className)}
-      style={{
-        ...style,
-        ...(isDragging && { opacity: 0.5 })
-      }}
     >
       <div className={classNames(styles[type], className)} style={unscaleStyle}>
         <div

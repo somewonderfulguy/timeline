@@ -102,7 +102,9 @@ const App = () => {
           >
             {rowsData?.timeline.map(({ id, fragments, type }) => (
               <Timeline
+                scale={scale}
                 key={id}
+                timelineId={id}
                 className={styles.timeline}
                 fragments={fragments}
                 type={type}
